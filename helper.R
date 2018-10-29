@@ -3,11 +3,13 @@ library(tidyverse)
 library(lubridate)
 library(DT)
 library(plotly)
+library(RCurl)
+
+gun_violence_total_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/Gun_Violence_2017_total.csv")
+State_2016_vote <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/2016_Election_Results.csv")
+state_population_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/population_2017.csv")
 
 
-gun_violence_total_2017 <- read_csv("Gun_Violence_2017_total.csv")
-State_2016_vote <- read_csv("2016_Election_Results.csv")
-state_population_2017 <- read_csv("population_2017.csv")
 
 gun_violence_2017_by_state <- gun_violence_total_2017 %>% 
   mutate(year = year(date), month = month(date)) %>% 
