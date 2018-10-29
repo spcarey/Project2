@@ -8,9 +8,9 @@ library(DT)
 
 
 
-gun_violence_total_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/CareyProject2/data/Gun_Violence_2017_total.csv")
-State_2016_vote <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/CareyProject2/data/2016_Election_Results.csv")
-state_population_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/CareyProject2/data/population_2017.csv")
+gun_violence_total_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/Gun_Violence_2017_total.csv")
+State_2016_vote <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/2016_Election_Results.csv")
+state_population_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/population_2017.csv")
 
 
 
