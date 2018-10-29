@@ -1,7 +1,5 @@
 
 
-source("https://raw.githubusercontent.com/spcarey/Project2/master/helper.R")
-
 
 #start Shiny Server func
 shinyServer(function(input, output, session) {

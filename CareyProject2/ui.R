@@ -1,8 +1,5 @@
-
-
-library(shiny)
-
-library(shinydashboard)
+#helper script for data
+source("https://raw.githubusercontent.com/spcarey/Project2/master/helper.R")
 
 #sidebar content 
 sidebar <-  dashboardSidebar(sidebarMenu(

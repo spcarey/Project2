@@ -1,10 +1,10 @@
 library(shiny)
 library(shinydashboard)
+library(plotly)
 library(tidyverse)
 library(lubridate)
 library(DT)
-library(plotly)
-library(RCurl)
+
 
 
 
