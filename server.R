@@ -37,6 +37,19 @@ shinyServer(function(input, output, session) {
   
   })
   
+  getData3 <- reactive({
+    if(input$Deaths_Wouded_Select2 == "Wounded"){
+      newData2 <- gun_violence_total_2017_pop %>%
+        group_by(month) %>%
+        summarise(Wounded = sum(n_injured))
+    } 
+    else {newData2 <- gun_violence_total_2017_pop %>% 
+      group_by(month) %>%
+      summarise(Deaths = sum(n_killed))
+    }
+    
+  })
+  
   
 #table out put
    output$table1 <-  renderDT(
@@ -81,8 +94,13 @@ shinyServer(function(input, output, session) {
 output$Plot2 <- renderPlotly({
   
   newData2 <- getData2()
+  newData3 <- getData3()
   
-  ggplot(newData2, aes(x = month, y = newData2[[3]], group=1 )) + geom_line()
+  newData4 <- rbind(newData2, newData3) %>% as.tibble()
+  
+  ggplot(newData4, aes(x = month, y = newData4)) +geom_point() + geom_line() 
+  
+ 
 
   })
 
