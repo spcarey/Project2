@@ -1,2 +1,1 @@
-# Project2
-ST590 NCSU Project 2
+# ST590_Project2
