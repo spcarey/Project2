@@ -39,12 +39,14 @@ shinyServer(function(input, output, session) {
   
   getData3 <- reactive({
     if(input$Deaths_Wouded_Select2 == "Wounded"){
-      newData2 <- gun_violence_total_2017_pop %>%
-        group_by(month) %>%
+      newData3 <- gun_violence_total_2017_pop %>%
+        filter(state == input$SelectState2) %>%
+        group_by(state, month) %>%
         summarise(Wounded = sum(n_injured))
     } 
-    else {newData2 <- gun_violence_total_2017_pop %>% 
-      group_by(month) %>%
+    else {newData3 <- gun_violence_total_2017_pop %>% 
+      filter(state == input$SelectState2) %>%
+      group_by(state, month) %>%
       summarise(Deaths = sum(n_killed))
     }
     
@@ -56,12 +58,20 @@ shinyServer(function(input, output, session) {
     getData(), options = list(lengthChange = FALSE)
    )
    
-   output$table2 <- renderDT(
-     getData2(), options = list(pageLength = 12)
+   output$table2 <- renderTable(
+     getData2(), 
+     align = 'l',
+     striped = TRUE
    )
    
-   output$table3 <- renderDT(
-     gun_violence_2017_fil, options = list(pageLength = 15)
+   output$table3 <- renderTable(
+     getData3(), 
+     align = 'l',
+     striped = TRUE
+   )
+   
+   output$table4 <- renderDT(
+     gun_violence_2017_fil,colnames = c("Date","State", "City/County","Deaths","Wounded"), options = list(pageLength = 15)
    )
   
 #end tableoutput
@@ -70,7 +80,7 @@ shinyServer(function(input, output, session) {
   output$Plot1 <- renderPlot({
 #get filtered data
   newData <- getData()
-  str(newData)
+  
 #create plot
 
   if(input$PartyBox  ){
@@ -95,11 +105,11 @@ output$Plot2 <- renderPlotly({
   
   newData2 <- getData2()
   newData3 <- getData3()
+
+  #ewData4 <- rbind(newData2, newData3) %>% as.tibble()
   
-  newData4 <- rbind(newData2, newData3) %>% as.tibble()
-  
-  ggplot(newData4, aes(x = month, y = newData4)) +geom_point() + geom_line() 
-  
+  ggplot(newData2, aes(x = month, y = newData2[[3]], group=1)) + geom_line() + geom_point() + 
+    geom_line(data = newData3,color = "red", aes(x = month, y= newData3[[3]])) + geom_point(data = newData3,color = "red", aes(x = month, y= newData3[[3]])) + labs(x = "Month", y=input$Deaths_Wouded_Select2)
  
 
   })
@@ -123,11 +133,11 @@ output$downloadData2 <- downloadHandler(
     paste(Sys.time(), ".csv", sep="")
   },
   content = function(file) {
-    write.csv(getData2(), file)
+    write.csv(rbind(getData2(),getData3()), file)
   }
 )
 
-output$downloadData3 <- downloadHandler(
+output$downloadData <- downloadHandler(
   filename = function() {
     paste(Sys.time(), ".csv", sep="")
   },

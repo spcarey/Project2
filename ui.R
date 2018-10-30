@@ -23,7 +23,21 @@ body <- dashboardBody(tabItems(
             valueBox(sum(gun_violence_total_2017$n_injured), "Total Wounded", icon = icon("gun"))
             
             
-  )),
+          ),
+          fluidRow(
+            box(
+              width = 12, solidHeader = TRUE, status = "primary",
+              h3("The data in this dashboard captures all incedents of American gun violence that took place in 2017."),
+              h3("Three separate datasets were combined to give all of the informaion."),
+              h3("Download them all here:",
+                 tags$a(href="https://github.com/spcarey/Project2/tree/master/data", "DATA")),
+              h3("Total or PerCapita statistics can be used in the first page"),
+              h4("PerCapita Statistics are calculated using the formula:"),
+              withMathJax(helpText(" $$\\frac{Total Deaths/Wounded}{State Population}$$"))
+              
+            )
+          )
+ ),
   #end Into Tab
   #All States
   tabItem(tabName = "All_States",
@@ -57,16 +71,24 @@ body <- dashboardBody(tabItems(
   tabItem(tabName = "Compare_States",
           fluidRow(
             box(
-              width = 9 ,solidHeader = TRUE,
+              width = 4,solidHeader = TRUE,
               collapsible = TRUE,
-              DTOutput("table2")
+              tableOutput("table2")
+            ),
+            box(
+              width = 4 ,solidHeader = TRUE,
+              collapsible = TRUE,
+              tableOutput("table3")
             ),
             
             box(
-              title = "Inputs", width = 3 ,solidHeader = FALSE,
-              selectInput("SelectState", label = h3("State"), 
+              title = "Inputs", width = 4 ,solidHeader = FALSE,
+              selectInput("SelectState", label = h3("State: 1"), 
                           choices = state_population_2017$state, 
                           selected = 1),
+              selectInput("SelectState2", label = h3("State: 2", style = "color:red;"), 
+                          choices = state_population_2017$state, 
+                          selected = "California"),
               selectInput("Deaths_Wouded_Select2", label = h3("Deaths or Wounded"), 
                           choices = list("Deaths"="Deaths", "Wounded"="Wounded"), 
                           selected = 1),
@@ -87,7 +109,7 @@ body <- dashboardBody(tabItems(
           fluidRow(
             box(
               width = 12, solidHeader = TRUE,
-              DTOutput("table3"),
+              DTOutput("table4"),
               downloadButton("downloadData3", "Download Data")
             )
           )
