@@ -109,7 +109,11 @@ output$Plot2 <- renderPlotly({
   #ewData4 <- rbind(newData2, newData3) %>% as.tibble()
   
   ggplot(newData2, aes(x = month, y = newData2[[3]], group=1)) + geom_line() + geom_point() + 
-    geom_line(data = newData3,color = "red", aes(x = month, y= newData3[[3]])) + geom_point(data = newData3,color = "red", aes(x = month, y= newData3[[3]])) + labs(x = "Month", y=input$Deaths_Wouded_Select2)
+    geom_line(data = newData3,color = "blue", aes(x = month, y= newData3[[3]])) + 
+    geom_point(data = newData3,color = "blue", aes(x = month, y= newData3[[3]])) + 
+    geom_line(data=gun_violence_NatAvg_Monthly,color="red", aes(x=month,y= NatAvg))+
+    geom_point(data=gun_violence_NatAvg_Monthly,color="red", aes(x=month,y= NatAvg))+
+    labs(x = "Month", y=input$Deaths_Wouded_Select2, title = "States vs. National Average")
  
 
   })

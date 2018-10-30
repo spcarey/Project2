@@ -86,7 +86,7 @@ body <- dashboardBody(tabItems(
               selectInput("SelectState", label = h3("State: 1"), 
                           choices = state_population_2017$state, 
                           selected = 1),
-              selectInput("SelectState2", label = h3("State: 2", style = "color:red;"), 
+              selectInput("SelectState2", label = h3("State: 2", style = "color:blue;"), 
                           choices = state_population_2017$state, 
                           selected = "California"),
               selectInput("Deaths_Wouded_Select2", label = h3("Deaths or Wounded"), 
