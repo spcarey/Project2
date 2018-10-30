@@ -38,10 +38,12 @@ gun_violence_total_2017_pop$month <- as.factor(gun_violence_total_2017_pop$month
 gun_violence_2017_fil <- gun_violence_total_2017 %>% select(date,state, city_or_county, n_killed, n_injured)
 
 gun_violence_NatAvg_Monthly <- gun_violence_total_2017 %>% 
-  group_by(month) %>% summarize(NatAvg= sum(n_killed)/51) %>% mutate(month = month.abb)
+  group_by(month) %>% summarize(NatAvg= sum(n_killed)/51) %>% mutate(MON = month.abb)
 
 
 
+gun_violence_NatAvg_Monthly$MON <- factor(gun_violence_NatAvg_Monthly$MON, levels = gun_violence_NatAvg_Monthly$MON[order(gun_violence_NatAvg_Monthly$month)])
 
-#leaflet(data = gun_violence_total_2017_pop[1:10,]) %>% addTiles() %>%
-  #addMarkers(lng = gun_violence_total_2017_pop$longitude,lat = gun_violence_total_2017_pop$latitude)
+ 
+
+

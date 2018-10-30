@@ -27,12 +27,16 @@ shinyServer(function(input, output, session) {
     newData2 <- gun_violence_total_2017_pop %>%
       filter(state == input$SelectState) %>%
       group_by(state, month) %>%
-      summarise(Wounded = sum(n_injured)) %>% mutate(month = month.abb)
+      summarise(Wounded = sum(n_injured)) %>% mutate(MON = month.abb)
+     
+    
   } 
     else {newData2 <- gun_violence_total_2017_pop %>%
       filter(state == input$SelectState) %>%
       group_by(state, month) %>%
-      summarise(Deaths = sum(n_killed)) %>% mutate(month = month.abb)
+      summarise(Deaths = sum(n_killed)) %>% mutate(MON = month.abb)
+    
+    #newData2$MON <- factor(newData2$MON, levels = newData2$MON[order(newData2$month)])
     }
   
   })
@@ -42,30 +46,39 @@ shinyServer(function(input, output, session) {
       newData3 <- gun_violence_total_2017_pop %>%
         filter(state == input$SelectState2) %>%
         group_by(state, month) %>%
-        summarise(Wounded = sum(n_injured))%>% mutate(month = month.abb)
+        summarise(Wounded = sum(n_injured))  %>% mutate(MON = month.abb)
+      
+      #newData3$MON <- factor(newData3$MON, levels = newData3$MON[order(newData3$month)])
+      
     } 
     else {newData3 <- gun_violence_total_2017_pop %>% 
       filter(state == input$SelectState2) %>%
       group_by(state, month) %>%
-      summarise(Deaths = sum(n_killed)) %>% mutate(month = month.abb)
+      summarise(Deaths = sum(n_killed))%>% mutate(MON = month.abb)
+    
+    #newData3$MON <- factor(newData3$MON, levels = newData3$MON[order(newData3$month)])
     }
     
   })
   
   
-#table out put
+#table output
    output$table1 <-  renderDT(
     getData(), options = list(lengthChange = FALSE)
    )
    
    output$table2 <- renderTable(
-     getData2(), 
+     getData2() %>% 
+       mutate(month = month.abb)%>% 
+       dplyr::select(1:3), 
      align = 'l',
      striped = TRUE
    )
    
    output$table3 <- renderTable(
-     getData3(), 
+     getData3() %>% 
+       mutate(month = month.abb) %>% 
+       dplyr::select(1:3), 
      align = 'l',
      striped = TRUE
    )
@@ -104,15 +117,17 @@ shinyServer(function(input, output, session) {
 output$Plot2 <- renderPlotly({
   
   newData2 <- getData2()
+  newData2$MON <- factor(newData2$MON, levels = newData2$MON[order(newData2$month)])
   newData3 <- getData3()
+  newData3$MON <- factor(newData3$MON, levels = newData3$MON[order(newData2$month)])
 
-  #ewData4 <- rbind(newData2, newData3) %>% as.tibble()
+  #newData4 <- rbind(newData2, newData3) %>% as.tibble()
   
-  ggplot(newData2, aes(x = month, y = newData2[[3]], group=1)) + geom_line() + geom_point() + 
-    geom_line(data = newData3,color = "blue", aes(x = month, y= newData3[[3]])) + 
-    geom_point(data = newData3,color = "blue", aes(x = month, y= newData3[[3]])) + 
-    geom_line(data=gun_violence_NatAvg_Monthly,color="red", aes(x=month,y= NatAvg))+
-    geom_point(data=gun_violence_NatAvg_Monthly,color="red", aes(x=month,y= NatAvg))+
+  ggplot(newData2, aes(x = MON, y = newData2[[3]], group=1)) + geom_line() + geom_point() + 
+    geom_line(data = newData3,color = "blue", aes(x = MON, y= newData3[[3]])) + 
+    geom_point(data = newData3,color = "blue", aes(x = MON, y= newData3[[3]])) + 
+    geom_line(data=gun_violence_NatAvg_Monthly,color="red", aes(x=MON,y= NatAvg))+
+    geom_point(data=gun_violence_NatAvg_Monthly,color="red", aes(x=MON,y= NatAvg))+
     labs(x = "Month", y=input$Deaths_Wouded_Select2, title = "States vs. National Average")
  
 
