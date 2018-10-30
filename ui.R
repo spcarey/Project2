@@ -28,7 +28,8 @@ body <- dashboardBody(tabItems(
             box(
               width = 12, solidHeader = TRUE, status = "primary",
               h3("The data in this dashboard captures all incedents of American gun violence that took place in 2017."),
-              h3("Three separate datasets were combined to give all of the informaion."),
+              h3("Three separate datasets were combined to give all of the informaion. All Gun Violence data is a subset of the Kaggle Gun Violence 
+                 dataset. Population numbers and voting data were both retrieved from data.gov"),
               h3("Download them all here:",
                  tags$a(href="https://github.com/spcarey/Project2/tree/master/data", "DATA")),
               h3("Total or PerCapita statistics can be used in the first page"),
