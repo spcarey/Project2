@@ -38,7 +38,8 @@ gun_violence_total_2017_pop$month <- as.factor(gun_violence_total_2017_pop$month
 gun_violence_2017_fil <- gun_violence_total_2017 %>% select(date,state, city_or_county, n_killed, n_injured)
 
 gun_violence_NatAvg_Monthly <- gun_violence_total_2017 %>% 
-  group_by(month) %>% summarize(NatAvg= sum(n_killed)/51)
+  group_by(month) %>% summarize(NatAvg= sum(n_killed)/51) %>% mutate(month = month.abb)
+
 
 
 

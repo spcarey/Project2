@@ -27,12 +27,12 @@ shinyServer(function(input, output, session) {
     newData2 <- gun_violence_total_2017_pop %>%
       filter(state == input$SelectState) %>%
       group_by(state, month) %>%
-      summarise(Wounded = sum(n_injured))
+      summarise(Wounded = sum(n_injured)) %>% mutate(month = month.abb)
   } 
     else {newData2 <- gun_violence_total_2017_pop %>%
       filter(state == input$SelectState) %>%
       group_by(state, month) %>%
-      summarise(Deaths = sum(n_killed))
+      summarise(Deaths = sum(n_killed)) %>% mutate(month = month.abb)
     }
   
   })
@@ -42,12 +42,12 @@ shinyServer(function(input, output, session) {
       newData3 <- gun_violence_total_2017_pop %>%
         filter(state == input$SelectState2) %>%
         group_by(state, month) %>%
-        summarise(Wounded = sum(n_injured))
+        summarise(Wounded = sum(n_injured))%>% mutate(month = month.abb)
     } 
     else {newData3 <- gun_violence_total_2017_pop %>% 
       filter(state == input$SelectState2) %>%
       group_by(state, month) %>%
-      summarise(Deaths = sum(n_killed))
+      summarise(Deaths = sum(n_killed)) %>% mutate(month = month.abb)
     }
     
   })
