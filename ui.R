@@ -4,9 +4,9 @@ source("https://raw.githubusercontent.com/spcarey/Project2/master/helper.R")
 #sidebar content 
 sidebar <-  dashboardSidebar(sidebarMenu(
   menuItem("Introduction", tabName = "Intro", icon = icon("dashboard")),
-  menuItem("All States", icon = icon("fa-chart-bar"), tabName = "All_States"),
-  menuItem("Compare States", icon = icon("fa-chart-bar"), tabName = "Compare_States"),
-  menuItem("All Data", icon = icon("fa-chart-bar"), tabName = "All_Data")
+  menuItem("All States", tabName = "All_States"),
+  menuItem("Compare States", tabName = "Compare_States"),
+  menuItem("All Data", tabName = "All_Data")
   
 )
 )
@@ -18,7 +18,7 @@ body <- dashboardBody(tabItems(
   tabItem(tabName = "Intro",
           fluidRow(
             # A static valueBox
-            valueBox(count(gun_violence_total_2017), "Incedents", icon = icon("gun")),
+            valueBox(count(gun_violence_total_2017), "Incidents", icon = icon("gun")),
             valueBox(sum(gun_violence_total_2017$n_killed), "Total Deaths", icon = icon("gun")),
             valueBox(sum(gun_violence_total_2017$n_injured), "Total Wounded", icon = icon("gun"))
             
