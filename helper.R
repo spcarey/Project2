@@ -11,6 +11,7 @@ library(DT)
 gun_violence_total_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/Gun_Violence_2017_total.csv")
 State_2016_vote <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/2016_Election_Results.csv")
 state_population_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/population_2017.csv")
+state_regs <- read.csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/state_regs.csv")
 
 
 
@@ -43,7 +44,3 @@ gun_violence_NatAvg_Monthly <- gun_violence_total_2017 %>%
 
 
 gun_violence_NatAvg_Monthly$MON <- factor(gun_violence_NatAvg_Monthly$MON, levels = gun_violence_NatAvg_Monthly$MON[order(gun_violence_NatAvg_Monthly$month)])
-
- 
-
-
