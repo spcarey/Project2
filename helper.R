@@ -44,3 +44,10 @@ gun_violence_NatAvg_Monthly <- gun_violence_total_2017 %>%
 
 
 gun_violence_NatAvg_Monthly$MON <- factor(gun_violence_NatAvg_Monthly$MON, levels = gun_violence_NatAvg_Monthly$MON[order(gun_violence_NatAvg_Monthly$month)])
+
+state_regs_perc <-  state_regs %>% 
+  filter(year==2017) %>% 
+  select(state,year,lawtotal) %>% 
+  mutate(perc = 100*(lawtotal/133))
+
+
