@@ -17,7 +17,7 @@ state_regs <- read.csv("https://raw.githubusercontent.com/spcarey/Project2/maste
 
 gun_violence_2017_by_state <- gun_violence_total_2017 %>% 
   mutate(year = year(date), month = month(date)) %>% 
-  filter(year == 2017) %>% 
+  filter(year == 2017 & state != "District of Columbia") %>% 
   group_by(state) %>% 
   summarise(deaths = sum(n_killed), wounded = sum(n_injured))
 
@@ -32,11 +32,15 @@ names(State_2016_vote) <- c("state", "party")
 
 gun_violence_2017_by_state <- left_join(gun_violence_2017_by_state, State_2016_vote , by = "state")
 
+gun_violence_2017_by_state <- gun_violence_2017_by_state %>% filter(state != "District of Columbia")
+
 gun_violence_total_2017_pop <- left_join(gun_violence_total_2017, state_population_2017, by="state")
 
 gun_violence_total_2017_pop$month <- as.factor(gun_violence_total_2017_pop$month)
 
-gun_violence_2017_fil <- gun_violence_total_2017 %>% select(date,state, city_or_county, n_killed, n_injured)
+gun_violence_2017_fil <- gun_violence_total_2017 %>%
+  filter(state != "District of Columbia") %>%
+  select(date,state, city_or_county, n_killed, n_injured)
 
 gun_violence_NatAvg_Monthly <- gun_violence_total_2017 %>% 
   group_by(month) %>% summarize(NatAvg= sum(n_killed)/51) %>% mutate(MON = month.abb)
@@ -50,4 +54,4 @@ state_regs_perc <-  state_regs %>%
   select(state,year,lawtotal) %>% 
   mutate(perc = 100*(lawtotal/133))
 
-
+State_Regs_Join_Perc <- left_join(gun_)
