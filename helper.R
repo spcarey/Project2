@@ -54,4 +54,4 @@ state_regs_perc <-  state_regs %>%
   select(state,year,lawtotal) %>% 
   mutate(perc = 100*(lawtotal/133))
 
-State_Regs_Join_Perc <- left_join(gun_)
+
