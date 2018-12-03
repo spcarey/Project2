@@ -12,6 +12,7 @@ gun_violence_total_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/P
 State_2016_vote <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/2016_Election_Results.csv")
 state_population_2017 <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/population_2017.csv")
 state_regs <- read.csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/state_regs.csv")
+model_data <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/master/data/model_data.csv")
 
 
 
@@ -50,8 +51,13 @@ gun_violence_NatAvg_Monthly <- gun_violence_total_2017 %>%
 gun_violence_NatAvg_Monthly$MON <- factor(gun_violence_NatAvg_Monthly$MON, levels = gun_violence_NatAvg_Monthly$MON[order(gun_violence_NatAvg_Monthly$month)])
 
 state_regs_perc <-  state_regs %>% 
-  filter(year==2017) %>% 
-  select(state,year,lawtotal) %>% 
+  select(year,state,lawtotal) %>% 
   mutate(perc = 100*(lawtotal/133))
 
+state_regs_perc <- state_regs_perc %>% select(state, perc)
 
+gun_violence_2017_laws <- left_join(gun_violence_2017_fil, state_regs_perc, by="state")
+
+State_2016_vote <- State_2016_vote %>% filter(state != "District of Columbia")
+
+gun_violence_2017_laws <- left_join(gun_violence_2017_laws, State_2016_vote, by="state")

@@ -6,8 +6,9 @@ sidebar <-  dashboardSidebar(sidebarMenu(
   menuItem("Introduction", tabName = "Intro", icon = icon("dashboard")),
   menuItem("All States", tabName = "All_States"),
   menuItem("Compare States", tabName = "Compare_States"),
-  menuItem("All Data", tabName = "All_Data")
-  
+  menuItem("All Data", tabName = "All_Data"),
+  menuItem("Supervised Learning Model", tabName = "Supervised_Model"),
+  menuItem("Unsupervised Learning Model", tabName = "Unsupervised_Model")
 )
 )
 
@@ -105,7 +106,7 @@ body <- dashboardBody(tabItems(
   ),  
 
   #end All States Tab
-  #Compare States
+  #ALL DATA
   tabItem(tabName = "All_Data",
           fluidRow(
             box(
@@ -115,8 +116,10 @@ body <- dashboardBody(tabItems(
             )
           )
   )
+ )
   
-))
+)
+
 
 
 # dasboard page set up

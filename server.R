@@ -61,6 +61,9 @@ shinyServer(function(input, output, session) {
     
   })
   
+  #getData4 
+  #getData5
+  
   
 #table output
    output$table1 <-  renderDT(
