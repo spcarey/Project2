@@ -61,8 +61,23 @@ shinyServer(function(input, output, session) {
     
   })
   
-  #getData4 
-  #getData5
+ getModel1 <- reactive({
+   ifelse(input$Dependent_Variable == "acc_death_child",  rpart.plot(tree_fit_child_death), 
+          ifelse(input$Dependent_Variable == "acc_death_teens",  rpart.plot(tree_fit_teen_death),
+                 ifelse(input$Dependent_Variable == "acc_inj_child",  rpart.plot(tree_fit_child_inJ),
+                        rpart.plot(tree_fit_teen_inj))))
+   
+  # tree_fit_1 <- tree( X ~ perc + state + population , data = model_train)
+  
+ })
+ 
+ getData4 <- reactive({
+   
+   ifelse(input$Dependent_Variable == "acc_death_child", newData4 <-select(model_data, perc,acc_death_child) , 
+          ifelse(input$Dependent_Variable == "acc_death_teens", newData4 <- select(model_data,perc,acc_death_teens) ,
+                 ifelse(input$Dependent_Variable == "acc_inj_child", newData4 <-select(model_data,perc,acc_inj_child),
+                      newData4 <- select(model_data,perc,acc_inj_teens))))
+ })
   
   
 #table output
@@ -136,7 +151,21 @@ output$Plot2 <- renderPlotly({
 
   })
 
+output$Plot3 <- renderPlot ({
+  
+  getModel1()
+  
+  
+})
 
+output$Plot4 <- renderPlot({
+  
+  newData4 <- getData4()
+  
+  ggplot(newData4, aes(x=newData4[[1]], y=newData4[[2]] ))+geom_point()
+  
+  
+})
 #Create Download out put for current data
 
 # Downloadable csv of selected dataset ----

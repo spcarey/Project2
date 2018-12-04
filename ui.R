@@ -115,8 +115,39 @@ body <- dashboardBody(tabItems(
               downloadButton("downloadData3", "Download Data")
             )
           )
+  ),
+  #End ALL DATA
+  #Supervised Model
+  tabItem(tabName = "Supervised_Model",
+          fluidRow(
+            box(
+              width = 3, solidHeader = TRUE,
+              selectInput("Dependent_Variable", label = h3("Select Dependent Variable"), 
+                          choices =  list("Accidental Child Deaths"="acc_death_child", "Accidental Teen Deaths"="acc_death_teens",
+                                          "Accidental Child Injury"= "acc_inj_child","Accidental Teen Injury" = "acc_inj_teens"), 
+                          selected = 1)
+            ),
+            box(
+              width = 9, solidHeader = TRUE,
+              h3("Linear Model Fit"),
+              plotOutput("Plot4")
+            )
+          ),
+          fluidRow(
+            box(
+              width = 12, solidHeader = TRUE,
+              plotOutput("Plot3")
+            )
+          )
+        
+      
+    
   )
+  
+ 
+         
  )
+ 
   
 )
 
