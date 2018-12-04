@@ -16,6 +16,17 @@ model_data <- read_csv("https://raw.githubusercontent.com/spcarey/Project2/maste
 
 
 
+
+#split Model Data into training and test data sets
+
+train <- sample(1:nrow(model_data), size = nrow(model_data)*0.6)
+test <- dplyr::setdiff(1:nrow(model_data), train)
+
+#create training and test data sets
+model_train <-  model_data[train, ]
+model_test <- model_data[test, ]
+
+
 gun_violence_2017_by_state <- gun_violence_total_2017 %>% 
   mutate(year = year(date), month = month(date)) %>% 
   filter(year == 2017 & state != "District of Columbia") %>% 
