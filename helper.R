@@ -75,7 +75,7 @@ State_2016_vote <- State_2016_vote %>% filter(state != "District of Columbia")
 gun_violence_2017_laws <- left_join(gun_violence_2017_laws, State_2016_vote, by="state")
 
 
-tree_fit_child_death <- tree( acc_death_child ~ perc + state + population , data = model_data)
-tree_fit_teen_death <- tree( acc_death_teens ~ perc + state + population , data = model_data)
-tree_fit_child_inJ <- tree( acc_inj_child ~ perc + state + population , data = model_data)
-tree_fit_teen_inj  <- tree( acc_inj_teens ~ perc + state + population , data = model_data)
+tree_fit_child_death <- tree( acc_death_child ~ perc +  population , data = model_data)
+tree_fit_teen_death <- tree( acc_death_teens ~ perc + population , data = model_data)
+tree_fit_child_inJ <- tree( acc_inj_child ~ perc +  population , data = model_data)
+tree_fit_teen_inj  <- tree( acc_inj_teens ~ perc +  population , data = model_data)
