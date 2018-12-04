@@ -7,8 +7,8 @@ sidebar <-  dashboardSidebar(sidebarMenu(
   menuItem("All States", tabName = "All_States"),
   menuItem("Compare States", tabName = "Compare_States"),
   menuItem("All Data", tabName = "All_Data"),
-  menuItem("Supervised Learning Model", tabName = "Supervised_Model"),
-  menuItem("Unsupervised Learning Model", tabName = "Unsupervised_Model")
+  menuItem("Models", tabName = "Models")
+  
 )
 )
 
@@ -118,7 +118,7 @@ body <- dashboardBody(tabItems(
   ),
   #End ALL DATA
   #Supervised Model
-  tabItem(tabName = "Supervised_Model",
+  tabItem(tabName = "Models",
           fluidRow(
             box(
               width = 3, solidHeader = TRUE,
@@ -126,7 +126,7 @@ body <- dashboardBody(tabItems(
                           choices =  list("Accidental Child Deaths"="acc_death_child", "Accidental Teen Deaths"="acc_death_teens",
                                           "Accidental Child Injury"= "acc_inj_child","Accidental Teen Injury" = "acc_inj_teens"), 
                           selected = 1),
-              h4("The Selector Box will select the dependent variable for a Regression Tree a LOESS Curve. This will model the relationship between accidental gun deaths/injuries amongst children/teens and the percent of firearms regulations adopted by the state")
+              h4("The Selector Box will select the dependent variable for a Regression Tree and LOESS Curve. It will also select one of the variables for Pricipal Components Analysis.  This will model the relationship between accidental gun deaths/injuries amongst children/teens and the percent of firearms regulations adopted by the state")
             ),
             box(
               width = 9, solidHeader = TRUE,
@@ -136,21 +136,21 @@ body <- dashboardBody(tabItems(
           ),
           fluidRow(
             box(
-              width = 12, solidHeader = TRUE,
+              width = 6, solidHeader = TRUE,
               plotOutput("Plot3")
+            ),
+            box(
+              width = 6, solidHeader = TRUE,
+              plotOutput("Plot5")
             )
           )
         
       
     
   )
-  
- 
-         
- )
  
   
-)
+))
 
 
 

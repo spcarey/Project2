@@ -171,6 +171,16 @@ output$Plot4 <- renderPlot({
   
   
 })
+
+output$Plot5 <- renderPlot({
+  
+  newData4 <- getData4()
+  
+  PCs <- prcomp(newData4, center = TRUE, scale. = TRUE)
+  
+  biplot(PCs, cex = 1)
+  
+})
 #Create Download out put for current data
 
 # Downloadable csv of selected dataset ----
