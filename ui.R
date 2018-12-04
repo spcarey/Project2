@@ -125,11 +125,12 @@ body <- dashboardBody(tabItems(
               selectInput("Dependent_Variable", label = h3("Select Dependent Variable"), 
                           choices =  list("Accidental Child Deaths"="acc_death_child", "Accidental Teen Deaths"="acc_death_teens",
                                           "Accidental Child Injury"= "acc_inj_child","Accidental Teen Injury" = "acc_inj_teens"), 
-                          selected = 1)
+                          selected = 1),
+              h4("The Selector Box will select the dependent variable for a Regression Tree a LOESS Curve. This will model the relationship between accidental gun deaths/injuries amongst children/teens and the percent of firearms regulations adopted by the state")
             ),
             box(
               width = 9, solidHeader = TRUE,
-              h3("Linear Model Fit"),
+              h3("LOESS Curve Fit"),
               plotOutput("Plot4")
             )
           ),

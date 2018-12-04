@@ -73,10 +73,12 @@ shinyServer(function(input, output, session) {
  
  getData4 <- reactive({
    
-   ifelse(input$Dependent_Variable == "acc_death_child", newData4 <-select(model_data, perc,acc_death_child) , 
-          ifelse(input$Dependent_Variable == "acc_death_teens", newData4 <- select(model_data,perc,acc_death_teens) ,
-                 ifelse(input$Dependent_Variable == "acc_inj_child", newData4 <-select(model_data,perc,acc_inj_child),
-                      newData4 <- select(model_data,perc,acc_inj_teens))))
+   ifelse(input$Dependent_Variable == "acc_death_child", newData4 <- model_data %>% select(perc, acc_death_child), 
+          ifelse(input$Dependent_Variable == "acc_death_teens", newData4 <- model_data %>% select(perc,acc_death_teens) ,
+                 ifelse(input$Dependent_Variable == "acc_inj_child", newData4 <-model_data %>% select(perc, acc_inj_child),
+                      newData4 <- model_data %>% select(perc,acc_inj_teens) )))
+   
+   as.data.frame(newData4)
  })
   
   
@@ -162,7 +164,10 @@ output$Plot4 <- renderPlot({
   
   newData4 <- getData4()
   
-  ggplot(newData4, aes(x=newData4[[1]], y=newData4[[2]] ))+geom_point()
+   
+ 
+
+    ggplot(newData4, aes(x=newData4[[2]], y=newData4[[1]] ))+geom_point()+geom_smooth() + labs(xlab="Deaths/Injured a year per state", ylab= "Percent of Firearms Laws adopted by state" )
   
   
 })

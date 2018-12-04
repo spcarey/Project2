@@ -77,7 +77,7 @@ State_2016_vote <- State_2016_vote %>% filter(state != "District of Columbia")
 gun_violence_2017_laws <- left_join(gun_violence_2017_laws, State_2016_vote, by="state")
 
 
-tree_fit_child_death <- rpart::rpart(formula = acc_death_child ~ perc  + population, data = model_data)
-tree_fit_teen_death <-rpart::rpart(formula = acc_death_teens ~ perc  + population, data = model_data)
-tree_fit_child_inJ <- rpart::rpart(formula = acc_inj_child ~ perc  + population, data = model_data)
-tree_fit_teen_inj  <- rpart::rpart(formula = acc_inj_teens ~ perc  + population, data = model_data)
+tree_fit_child_death <- rpart::rpart(formula = acc_death_child ~ perc  , data = model_data)
+tree_fit_teen_death <-rpart::rpart(formula = acc_death_teens ~ perc  , data = model_data)
+tree_fit_child_inJ <- rpart::rpart(formula = acc_inj_child ~ perc , data = model_data)
+tree_fit_teen_inj  <- rpart::rpart(formula = acc_inj_teens ~ perc  , data = model_data)
