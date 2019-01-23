@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548273864493.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "649C2D5",
+    "lastKnownWriteTime" : 1548277435,
+    "last_content_update" : 1548277435912,
+    "path" : "~/ShinyApps/shiny_app_test/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+        "cursorPosition" : "20,31",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

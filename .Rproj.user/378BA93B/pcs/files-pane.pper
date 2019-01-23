@@ -1,0 +1,9 @@
+{
+    "path" : "~/ShinyApps/shiny_app_test/data",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
