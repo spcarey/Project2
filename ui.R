@@ -1,13 +1,13 @@
 #helper script for data
-source("https://raw.githubusercontent.com/spcarey/Project2/master/helper.R")
+source("helper.r")
 
 #sidebar content 
 sidebar <-  dashboardSidebar(sidebarMenu(
   menuItem("Introduction", tabName = "Intro", icon = icon("dashboard")),
   menuItem("All States", tabName = "All_States"),
   menuItem("Compare States", tabName = "Compare_States"),
-  menuItem("All Data", tabName = "All_Data"),
-  menuItem("Models", tabName = "Models")
+  menuItem("All Data", tabName = "All_Data")
+ 
   
 )
 )
@@ -32,10 +32,8 @@ body <- dashboardBody(tabItems(
               h3("Three separate datasets were combined to give all of the informaion. All Gun Violence data is a subset of the Kaggle Gun Violence 
                  dataset. Population numbers and voting data were both retrieved from data.gov "),
               h3("Download them all here:",
-                 tags$a(href="https://github.com/spcarey/Project2/tree/master/data", "DATA")),
-              br(),
-              h4("PerCapita Statistics are calculated using the formula:"),
-              withMathJax(helpText(" $$\\frac{Total Deaths/Wounded}{State Population}$$"))
+                 tags$a(href="https://github.com/spcarey/Project2/tree/master/data", "DATA"))
+             
               
             )
           )
@@ -65,7 +63,7 @@ body <- dashboardBody(tabItems(
           fluidRow(
             box(
                width = 12, solidHeader = TRUE, status = "primary",
-              plotOutput("Plot1")
+               plotlyOutput("Plot1")
             )
   )),
   #end All States Tab
@@ -115,39 +113,10 @@ body <- dashboardBody(tabItems(
               downloadButton("downloadData3", "Download Data")
             )
           )
-  ),
+  )
   #End ALL DATA
   #Supervised Model
-  tabItem(tabName = "Models",
-          fluidRow(
-            box(
-              width = 3, solidHeader = TRUE,
-              selectInput("Dependent_Variable", label = h3("Select Dependent Variable"), 
-                          choices =  list("Accidental Child Deaths"="acc_death_child", "Accidental Teen Deaths"="acc_death_teens",
-                                          "Accidental Child Injury"= "acc_inj_child","Accidental Teen Injury" = "acc_inj_teens"), 
-                          selected = 1),
-              h4("The Selector Box will select the dependent variable for a Regression Tree and LOESS Curve. It will also select one of the variables for Pricipal Components Analysis.  This will model the relationship between accidental gun deaths/injuries amongst children/teens and the percent of firearms regulations adopted by the state")
-            ),
-            box(
-              width = 9, solidHeader = TRUE,
-              h3("LOESS Curve Fit"),
-              plotOutput("Plot4")
-            )
-          ),
-          fluidRow(
-            box(
-              width = 6, solidHeader = TRUE,
-              plotOutput("Plot3")
-            ),
-            box(
-              width = 6, solidHeader = TRUE,
-              plotOutput("Plot5")
-            )
-          )
-        
-      
-    
-  )
+ 
  
   
 ))

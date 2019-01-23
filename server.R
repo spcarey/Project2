@@ -1,6 +1,4 @@
 
-
-
 #start Shiny Server func
 shinyServer(function(input, output, session) {
   
@@ -110,7 +108,7 @@ shinyServer(function(input, output, session) {
 #end tableoutput
   
 #Start graph output
-  output$Plot1 <- renderPlot({
+  output$Plot1 <- renderPlotly({
 #get filtered data
   newData <- getData()
   
