@@ -1,5 +1,5 @@
 
-
+options(device='cairo')
 
 #start Shiny Server func
 shinyServer(function(input, output, session) {

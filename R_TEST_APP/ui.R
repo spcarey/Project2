@@ -1,6 +1,7 @@
 #helper script for data
 source("helper.r")
 
+options(device='cairo')
 
 
 #sidebar content 
