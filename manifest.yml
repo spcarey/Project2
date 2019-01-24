@@ -1,0 +1,6 @@
+applications:
+ - name: R_TEST_APP
+   buildpack: git:///cloudfoundry/r-buildpack.git
+   command: R --no-save --gui-none < /shiny_app_test/startscript.R
+   instances: 1
+memory: 1G
